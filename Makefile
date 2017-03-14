@@ -1,4 +1,4 @@
-CFILE= main.c hash.c mis.c
+CFILE= main.c hash.c mis.c prompt.c
 
 OFILE=$(CFILE:.c=.o)
 FLAG= -Wall -Werror -Wextra -Wno-unused-but-set-variable

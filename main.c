@@ -12,7 +12,7 @@ int 	main(int argc, char **argv, char **en)
 
 	noflag(argc, argv);
 	table = create_hashtable(en, &size);
-	ft_putendl(fhash(table, "LS_COLORS", size));
+	prompt(fhash(table, "LOGNAME", size), fhash(table, "HOSTNAME", size));
 	hash_free(table, size);
 	return (0);
 }

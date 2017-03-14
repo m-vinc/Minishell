@@ -1,5 +1,14 @@
 #include "minishell.h"
 
+char	*ft_strjoinf(char *one, char *two)
+{
+	char *tmp;
+
+	tmp = ft_strjoin(one, two);
+	free(one);
+	return (tmp);
+}
+
 void	*w_malloc(size_t	size)
 {
 	void	*m;
