@@ -12,4 +12,5 @@ t_hash	**create_hashtable(char **str, int *size);
 void	*w_malloc(size_t size);
 int		ihash(char *str, int size);
 char	*fhash(t_hash **table, char *str, int size);
+void	hash_free(t_hash **table, int size);
 #endif

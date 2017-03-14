@@ -9,7 +9,9 @@ MINISHELL_H	minishell.h	2;"	d
 cbdigit	libft/ft_itoa.c	/^static int		cbdigit(int n)$/;"	f	file:
 content_size	libft/libft.h	/^	size_t			content_size;$/;"	m	struct:s_list
 content	libft/libft.h	/^	void			*content;$/;"	m	struct:s_list
+create_hashtable	hash.c	/^t_hash	**create_hashtable(char **str, int *size)$/;"	f
 data	minishell.h	/^	char			*data;$/;"	m	struct:s_hash
+fhash	hash.c	/^char	*fhash(t_hash **table, char *str, int size)$/;"	f
 ft_atoi	libft/ft_atoi.c	/^int		ft_atoi(const char *str)$/;"	f
 ft_bzero	libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
 ft_isalnum	libft/ft_isalnum.c	/^int		ft_isalnum(int c)$/;"	f
@@ -68,12 +70,19 @@ ft_strsub	libft/ft_strsub.c	/^char	*ft_strsub(char const *s, unsigned int start,
 ft_strtrim	libft/ft_strtrim.c	/^char	*ft_strtrim(char const *s)$/;"	f
 ft_tolower	libft/ft_tolower.c	/^int		ft_tolower(int c)$/;"	f
 ft_toupper	libft/ft_toupper.c	/^int		ft_toupper(int c)$/;"	f
+hash_free	mis.c	/^void	hash_free(t_hash **table)$/;"	f
+hash_push	hash.c	/^void	hash_push(t_hash **hash, char *index, char *str, int ihash)$/;"	f
+ihash	hash.c	/^int		ihash(char *str, int size)$/;"	f
 index	minishell.h	/^	char			*index;$/;"	m	struct:s_hash
-main	main.c	/^int main()$/;"	f
+init_zhash	hash.c	/^t_hash	**init_zhash(int size)$/;"	f
+main	main.c	/^int 	main(int argc, char **argv, char **en)$/;"	f
 nbword	libft/ft_strsplit.c	/^static	int		nbword(char *str, char ch)$/;"	f	file:
 next	libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
-next	minishell.h	/^	struct	hash	*next;$/;"	m	struct:s_hash	typeref:struct:s_hash::hash
+next	minishell.h	/^	struct	s_hash	*next;$/;"	m	struct:s_hash	typeref:struct:s_hash::s_hash
+noflag	main.c	/^void	noflag(int argc, char **argv)$/;"	f
 s_hash	minishell.h	/^typedef struct	s_hash$/;"	s
 s_list	libft/libft.h	/^typedef struct		s_list$/;"	s
+t_hash	minishell.h	/^}				t_hash;$/;"	t	typeref:struct:s_hash
 t_list	libft/libft.h	/^}					t_list;$/;"	t	typeref:struct:s_list
+w_malloc	mis.c	/^void	*w_malloc(size_t	size)$/;"	f
 w_zdup	libft/ft_itoa.c	/^static char		*w_zdup(char *ito)$/;"	f	file:
