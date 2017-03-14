@@ -1,0 +1,7 @@
+syn keyword CTagsStructure s_list s_hash
+syn keyword CTagsMember content content_size next data index
+syn keyword CTagsFunction ft_putstr ft_strstr ft_strcpy ft_strncmp ft_strnew ft_strdup ft_strcmp ft_isascii ft_strrchr ft_putnbr_fd ft_strjoin ft_memccpy ft_putendl ft_lstmap ft_striter ft_strcat ft_putchar_fd ft_memcmp w_zdup ft_strdel ft_strmap ft_strequ ft_lstdel cbdigit ft_strlen ft_memalloc ft_atoi ft_memdel main nbword ft_tolower ft_memmove ft_isalpha ft_strchr ft_strtrim ft_strsplit ft_strclr ft_strmapi ft_memset ft_memcpy ft_isalnum ft_lstiter ft_putendl_fd ft_isprint ft_putstr_fd ft_putnbr
+syn keyword CTagsFunction ft_strnstr ft_memchr ft_strsub ft_lstadd ft_toupper ft_lstdelone ft_strlcat ft_isdigit ft_strncpy ft_lstnew ft_striteri ft_putchar ft_bzero ft_strncat ft_itoa ft_strnequ
+syn keyword CTagsType t_list
+syn keyword CTagsDefinedName LIBFT_H MINISHELL_H
+
