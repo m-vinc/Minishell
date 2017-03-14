@@ -33,7 +33,8 @@ char	*fhash(t_hash **table, char *str, int size)
 	t_hash	*h;
 
 	h = table[ihash(str, size)];
-
+	if (!str)
+		return (0);
 	while (h)
 	{
 		if (ft_strcmp(h->index, str) == 0)

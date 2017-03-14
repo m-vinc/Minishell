@@ -1,7 +1,7 @@
-CFILE= main.c hash.c mis.c prompt.c
+CFILE= main.c hash.c mis.c prompt.c mis_2.c
 
 OFILE=$(CFILE:.c=.o)
-FLAG= -Wall -Werror -Wextra -Wno-unused-but-set-variable
+FLAG= -Wall -Werror -Wextra -g
 NAME= minishell
 LIB= libft/libft.a
 

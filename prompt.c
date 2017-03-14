@@ -1,9 +1,13 @@
 #include "minishell.h"
 
-void	execute_cmd(char *url, char **en)
+void	exec_cmd(char *path, t_hash **table, int size)
 {
-	
+	char *s;
+
+	s = fhash(table, "TERM", size);
+	free(path);
 }
+
 int		searchexec(char *path, char *cmd, t_hash **table)
 {
 	DIR 			*folder;
@@ -11,7 +15,8 @@ int		searchexec(char *path, char *cmd, t_hash **table)
 	char			*url;
 
 	url = ft_strdup("");
-	if ((folder = opendir(path))== 0)
+	folder = 0;
+	if ((folder = opendir(path)) == 0)
 		return (0);
 	while ((file = readdir(folder)))
 	{
@@ -20,35 +25,42 @@ int		searchexec(char *path, char *cmd, t_hash **table)
 			url = ft_strjoinf(url, path);
 			url = ft_strjoinf(url, "/");
 			url = ft_strjoinf(url, file->d_name);
-			execute_cmd(url, hashtochar(table));
+			exec_cmd(url, table, size);
+			free(cmd);
+			(void)closedir(folder);
 			return (1);
 		}
 	}
+	free(url);
 	(void)closedir(folder);
 	return (0);
 }
 
 void	handle_cmd(char *cmd, t_hash **table, int size)
 {
-	char *path;
-	char *s;
-	char tmp;
-	
+	char 	*path;
+	char	**pp;
+	int		x;
+
+	x = 0;
+	if (ft_strcmp(cmd, "exit") == 0)
+		w_exit(0, table, size);
 	path = fhash(table, "PATH", size);
-	while (*path)
+	pp = ft_strsplit(path, ':');
+	while (pp[x] != 0)
 	{
-		s = path;
-		while (*path && *path != ':')
-			path++;
-		tmp = *path;
-		*path = 0;
-		if (searchexec(s, cmd, table))
+		if (searchexec(pp[x], cmd, table, size))
+		{
+			while (pp[x] != 0)
+				free(pp[x++]);
+			free(pp);
 			return ;
-		*path++ = tmp;
+		}
+		free(pp[x]);
+		x++;
 	}
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(": commmand not found", 2);
+	free(pp);
+	w_error(cmd);
 	free(cmd);
 }
 
@@ -59,7 +71,7 @@ char	*read_cmd()
 	char	buf[BUFF_SIZE + 1];
 	char	*ptr;
 
-	cmd = ft_strdup("");
+	cmd = ft_strdup("\0");
 	while ((ret = read(0, buf, BUFF_SIZE)))
 	{
 		buf[ret] = '\0';
@@ -82,10 +94,10 @@ void	prompt(t_hash **table, int size)
 	while (1)
 	{
 		t = ft_strdup("");
+		t = ft_strjoinf(t, fhash(table, "USER", size));
+		t = ft_strjoinf(t, "@");
 		t = ft_strjoinf(t, fhash(table, "LOGNAME", size));
-		t = ft_strjoinf(t, " ~ ");
-		t = ft_strjoinf(t, fhash(table, "HOSTNAME", size));
-		t = ft_strjoinf(t, " :");
+		t = ft_strjoinf(t, " => ");
 		ft_putstr(t);
 		free(t);
 		handle_cmd(read_cmd(), table, size);

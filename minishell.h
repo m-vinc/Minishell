@@ -21,4 +21,7 @@ void	prompt(t_hash **table, int size);
 char	*ft_strjoinf(char *one, char *two);
 void	handle_cmd(char *cmd, t_hash **table, int size);
 char	*read_cmd();
+void	w_exit(int no, t_hash **table, int size);
+void	free_split(char **split);
+void	w_error(char *file);
 #endif
