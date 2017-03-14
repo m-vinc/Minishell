@@ -23,7 +23,7 @@ int		ihash(char *str, int size)
 		return (-1);
 	while (*str != '\0')
 	{
-		total += (size * 2) + *str;
+		total += (size * *str) + *str;
 		str++;
 	}
 	return (total % size);

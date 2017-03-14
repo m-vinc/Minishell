@@ -1,8 +1,54 @@
 #include "minishell.h"
 
-void	handle_cmd(char *cmd)
+void	execute_cmd(char *url, char **en)
 {
-	ft_putendl(cmd);
+	
+}
+int		searchexec(char *path, char *cmd, t_hash **table)
+{
+	DIR 			*folder;
+	struct dirent 	*file;
+	char			*url;
+
+	url = ft_strdup("");
+	if ((folder = opendir(path))== 0)
+		return (0);
+	while ((file = readdir(folder)))
+	{
+		if (ft_strcmp(cmd, file->d_name) == 0)
+		{
+			url = ft_strjoinf(url, path);
+			url = ft_strjoinf(url, "/");
+			url = ft_strjoinf(url, file->d_name);
+			execute_cmd(url, hashtochar(table));
+			return (1);
+		}
+	}
+	(void)closedir(folder);
+	return (0);
+}
+
+void	handle_cmd(char *cmd, t_hash **table, int size)
+{
+	char *path;
+	char *s;
+	char tmp;
+	
+	path = fhash(table, "PATH", size);
+	while (*path)
+	{
+		s = path;
+		while (*path && *path != ':')
+			path++;
+		tmp = *path;
+		*path = 0;
+		if (searchexec(s, cmd, table))
+			return ;
+		*path++ = tmp;
+	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": commmand not found", 2);
 	free(cmd);
 }
 
@@ -29,19 +75,19 @@ char	*read_cmd()
 	return (cmd);
 }
 
-void	prompt(char *user, char *host)
+void	prompt(t_hash **table, int size)
 {
 	char	*t;
 
 	while (1)
 	{
 		t = ft_strdup("");
-		t = ft_strjoinf(t, user);
+		t = ft_strjoinf(t, fhash(table, "LOGNAME", size));
 		t = ft_strjoinf(t, " ~ ");
-		t = ft_strjoinf(t, host);
+		t = ft_strjoinf(t, fhash(table, "HOSTNAME", size));
 		t = ft_strjoinf(t, " :");
 		ft_putstr(t);
 		free(t);
-		handle_cmd(read_cmd());
+		handle_cmd(read_cmd(), table, size);
 	}
 }
