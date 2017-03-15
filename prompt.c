@@ -1,6 +1,15 @@
 #include "minishell.h"
 #include <limits.h>
 
+void	execute_cmd(char *cmd, char *rcmd, t_env env)
+{
+	ft_putstr("cmd -> ");
+	ft_putendl(cmd);
+	ft_putstr("rcmd -> ");
+	ft_putendl(rcmd);
+	ft_putendl(fhash(env.table, "PATH", env.table_size));
+}
+
 char	*search_exec(char *cmd, t_env env)
 {
 	struct stat		info;
@@ -36,7 +45,7 @@ void	handle_cmd(char *cmd, t_env env)
 		x++;
 	while (cmd[x + y] != '\0' &&  (cmd[x + y] != ' ' && cmd[x + y] != '\t'))
 		y++;
-	if (x == 0 && y == 0)
+	if ((x == 0 && y == 0) || (cmd[x] == '\0'))
 	{
 		free(cmd);
 		return ;
@@ -44,9 +53,8 @@ void	handle_cmd(char *cmd, t_env env)
 	rcmd = ft_strsub(cmd, x, y);
 	save = ft_strdup(rcmd);
 	rcmd = search_exec(rcmd, env);
+	(rcmd == 0 ? w_error(save) : execute_cmd(cmd, rcmd, env));
 	free(cmd);
-	if (rcmd == 0)
-		w_error(save);
 	free(rcmd);
 	free(save);
 }
