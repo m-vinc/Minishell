@@ -3,11 +3,15 @@
 
 void	execute_cmd(char *cmd, char *rcmd, t_env env)
 {
-	ft_putstr("cmd -> ");
-	ft_putendl(cmd);
+	char **av;
+
+	av = ft_strsplit(cmd, ' ');
+	free(av[0]);
+	av[0] = ft_strdup(rcmd);
+	ft_putendl(av[0]);
 	ft_putstr("rcmd -> ");
 	ft_putendl(rcmd);
-	ft_putendl(fhash(env.table, "PATH", env.table_size));
+	ft_putendl_fd(fhash(env.table, "PATH", env.table_size), 2);
 }
 
 char	*search_exec(char *cmd, t_env env)
