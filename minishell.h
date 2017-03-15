@@ -32,7 +32,8 @@ void		w_exit(int no, t_hash **table, int size);
 void		w_error(char *file);
 void		free_split(char **spt, int index);
 void		exec_cmd(char *cmd, char **av, t_env env);
-int			isbuiltins(char *cmd);
+int			is_builtins(char *cmd);
+void		execute_builtins(char **av, int fn);
 char		*search_exec(char *cmd, t_env env);
 char		*get_path(char **path, char *file);
 #endif

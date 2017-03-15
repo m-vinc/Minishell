@@ -3,17 +3,19 @@
 
 void	execute_cmd(char *cmd, char *rcmd, t_env env)
 {
-	char **av;
+	char 	**av;
+	int		fn;
 
-	av = ft_strsplit(cmd, ' ');
-	free(av[0]);
-	av[0] = ft_strdup(rcmd);
-	ft_putendl(av[0]);
-	ft_putstr("rcmd -> ");
-	ft_putendl(rcmd);
-	ft_putendl_fd(fhash(env.table, "PATH", env.table_size), 2);
+	if ((fn = is_builtins(rcmd)) != -1)
+	{
+		av = ft_strsplit(cmd, ' ');
+		free(av[0]);
+		av[0] = ft_strdup(rcmd);
+		execute_builtins(av, fn);
+	}
+	else
+		ft_putendl("shah");
 }
-
 char	*search_exec(char *cmd, t_env env)
 {
 	struct stat		info;
@@ -24,6 +26,8 @@ char	*search_exec(char *cmd, t_env env)
 	x = 0;
 	if (cmd == 0)
 		return (0);
+	if ((is_builtins(cmd) != -1))
+		return (cmd);
 	if ((stat(cmd, &info)) == -1)
 	{
 		path = ft_strsplit(fhash(env.table, "PATH", env.table_size), ':');
