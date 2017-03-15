@@ -7,12 +7,13 @@ void	noflag(int argc, char **argv)
 }
 int 	main(int argc, char **argv, char **en)
 {
-	t_hash 	**table;
-	int 	size;
+	t_env env;
+
+	env.env = en;
 
 	noflag(argc, argv);
-	table = create_hashtable(en, &size);
-	prompt(table, size);
-	hash_free(table, size);
+	env.table = create_hashtable(en, &env.table_size);
+	prompt(env);
+	hash_free(env.table, env.table_size);
 	return (0);
 }

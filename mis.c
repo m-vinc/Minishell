@@ -2,11 +2,13 @@
 
 char	*ft_strjoinf(char *one, char *two)
 {
-	char *tmp;
+	char *t;
 
-	tmp = ft_strjoin(one, two);
-	free(one);
-	return (tmp);
+	t = one;
+	one = ft_strjoin(one, two);
+	if (t)
+		free(t);
+	return (one);
 }
 
 void	*w_malloc(size_t	size)
@@ -42,17 +44,6 @@ void	hash_free(t_hash **table, int size)
 		x++;
 	}
 	free(table);
-}
-void	free_split(char **split)
-{
-	int	x;
-
-	x = 0;
-	while (split[x] != 0)
-	{
-		free(&split[x]);
-	}
-	free(&split);
 }
 void	w_exit(int no, t_hash **table, int size)
 {

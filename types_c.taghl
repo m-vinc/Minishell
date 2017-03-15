@@ -1,7 +1,7 @@
-syn keyword CTagsStructure s_list s_hash
-syn keyword CTagsMember content content_size next data index
-syn keyword CTagsFunction ft_putstr ft_strstr ft_strcpy ft_strncmp ft_strnew ft_strdup ft_putendl ft_isascii ft_strrchr ft_putnbr_fd ft_strjoin ft_memccpy fhash ft_lstmap ft_striter ihash w_malloc ft_strcat ft_putchar_fd ft_memcmp w_zdup ft_strdel ft_strmap hash_free ft_strequ ft_lstdel noflag cbdigit ft_strlen ft_memalloc ft_atoi ft_memdel main ft_strcmp nbword ft_tolower ft_memmove ft_isalpha ft_strchr ft_strtrim ft_strsplit ft_strclr ft_strmapi ft_memset hash_push ft_memcpy ft_isalnum ft_lstiter
-syn keyword CTagsFunction ft_putendl_fd ft_isprint ft_putstr_fd ft_putnbr ft_strnstr ft_memchr ft_strsub ft_lstadd ft_toupper ft_lstdelone ft_strlcat ft_isdigit init_zhash ft_strncpy ft_lstnew ft_striteri ft_putchar ft_bzero ft_strncat ft_itoa create_hashtable ft_strnequ
-syn keyword CTagsType t_hash t_list
-syn keyword CTagsDefinedName LIBFT_H MINISHELL_H
+syn keyword CTagsStructure s_command s_list s_env s_hash
+syn keyword CTagsMember index content_size next content command env av table table_size data
+syn keyword CTagsFunction ft_putstr ft_strstr prompt ft_strcpy ft_strncmp ft_strnew ft_strdup ft_putendl ft_isascii ft_strrchr ft_putnbr_fd ft_strjoin ft_memccpy fhash ft_lstmap ft_striter ihash w_malloc ft_strcat ft_putchar_fd ft_memcmp w_zdup ft_strdel makeurl ft_strmap hash_free ft_strequ ft_lstdel noflag free_split cbdigit ft_strlen ft_strjoinf ft_memalloc ft_atoi ft_memdel main ft_strcmp read_cmd nbword ft_tolower ft_memmove ft_isalpha ft_strchr ft_strtrim is_builtins ft_strsplit ft_strclr ft_strmapi
+syn keyword CTagsFunction ft_memset hash_push ft_memcpy ft_isalnum handle_cmd ft_lstiter ft_putendl_fd ft_isprint ft_putstr_fd ft_putnbr ft_strnstr ft_memchr ft_strsub ft_lstadd w_error ft_toupper ft_lstdelone ft_strlcat ft_isdigit init_zhash ft_strncpy ft_lstnew search_exec ft_striteri get_path w_exit ft_putchar ft_bzero ft_strncat ft_itoa create_hashtable ft_strnequ
+syn keyword CTagsType t_hash t_command t_env t_list
+syn keyword CTagsDefinedName BUFF_SIZE LIBFT_H MINISHELL_H
 
