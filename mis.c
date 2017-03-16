@@ -45,8 +45,8 @@ void	hash_free(t_hash **table, int size)
 	}
 	free(table);
 }
-void	w_exit(int no, t_hash **table, int size)
+void	w_exit(int no, t_env env)
 {
-	hash_free(table, size);
+	hash_free(env.table, env.table_size);
 	exit(no);
 }

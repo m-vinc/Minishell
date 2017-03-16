@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:50:11 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/15 18:12:06 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/16 18:32:37 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,42 @@ void	echo(char **av)
 	}
 	ft_putchar('\n');
 }
-void	execute_builtins(char **av, int fn)
+void	cd(char **av, t_env env)
+{
+	int		x;
+	int		err;
+
+	err = 0;
+	x = 1;
+	while (av[x] != 0)
+		x++;
+	if (x > 2)
+	{
+		ft_putendl("cd: too many argument");
+		return ;
+	}
+	if (!av[1])
+	{
+		if ((err = chdir(fhash(env.table, "HOME", env.table_size))) != 0)
+			ft_putendl("cd: HOME error");
+	}
+	else
+	{
+		(av[1][0] == '/' ? chdirabs(av[1]) : chdirrel(av[1], env));
+	}
+}
+void	execute_builtins(char **av, int fn, t_env env)
 {
 	if (fn == 0)
-	{
 		echo(av);
+	if (fn == 1)
+	{
+		cd(av, env);
+	}
+	if (fn == 5)
+	{
+		free_split(av, 0);
+		w_exit(42, env);
 	}
 	return ;
 }

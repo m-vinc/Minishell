@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include <limits.h>
 
-void	execute_cmd(char *cmd, char *rcmd, t_env env)
+void	execute_cmd(char *cmd, char *rcmd, t_env env, char *save)
 {
 	char 	**av;
 	int		fn;
@@ -11,10 +11,20 @@ void	execute_cmd(char *cmd, char *rcmd, t_env env)
 		av = ft_strsplit(cmd, ' ');
 		free(av[0]);
 		av[0] = ft_strdup(rcmd);
-		execute_builtins(av, fn);
+		free(cmd);
+		free(rcmd);
+		free(save);
+		execute_builtins(av, fn, env);
+		free(av[0]);
+		free_split(av, 1);
 	}
 	else
+	{
 		ft_putendl("shah");
+		(cmd ? free(cmd) : 0);
+		(rcmd ? free(rcmd) : 0);
+		(save ? free(save) : 0);
+	}
 }
 char	*search_exec(char *cmd, t_env env)
 {
@@ -40,6 +50,7 @@ char	*search_exec(char *cmd, t_env env)
 		return (cmd);
 	}
 }
+
 void	handle_cmd(char *cmd, t_env env)
 {
 	int		x;
@@ -61,10 +72,7 @@ void	handle_cmd(char *cmd, t_env env)
 	rcmd = ft_strsub(cmd, x, y);
 	save = ft_strdup(rcmd);
 	rcmd = search_exec(rcmd, env);
-	(rcmd == 0 ? w_error(save) : execute_cmd(cmd, rcmd, env));
-	free(cmd);
-	free(rcmd);
-	free(save);
+	(rcmd == 0 ? w_error(save, cmd) : execute_cmd(cmd, rcmd, env, save));
 }
 
 char	*read_cmd()
@@ -94,15 +102,16 @@ void	prompt(t_env env)
 {
 	char	*t;
 	char	*tmp;
+	char	str[UCHAR_MAX];
 
 	while (1)
 	{
+		getcwd(str, UCHAR_MAX);
 		tmp = fhash(env.table, "USER", env.table_size);
 		t = ft_strdup("");
 		t = ft_strjoinf(t, (tmp == 0 ? "" : tmp));
 		t = ft_strjoinf(t, "@");
-		tmp = fhash(env.table, "HOSTNAME", env.table_size);
-		t = ft_strjoinf(t, (tmp == 0 ? "" : tmp));
+		t = ft_strjoinf(t, str);
 		t = ft_strjoinf(t, " => ");
 		ft_putstr(t);
 		free(t);

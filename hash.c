@@ -31,8 +31,10 @@ int		ihash(char *str, int size)
 char	*fhash(t_hash **table, char *str, int size)
 {
 	t_hash	*h;
+	t_hash	*s;
 
 	h = table[ihash(str, size)];
+	s = h;
 	if (!str)
 		return (0);
 	while (h)
@@ -41,6 +43,7 @@ char	*fhash(t_hash **table, char *str, int size)
 			return (h->data);
 		h = h->next;
 	}
+	h = s;
 	return (0);
 }
 void	hash_push(t_hash **hash, char *index, char *str, int ihash)

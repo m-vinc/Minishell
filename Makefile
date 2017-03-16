@@ -1,4 +1,4 @@
-CFILE= mis_2.c command.c read_path.c main.c hash.c mis.c prompt.c builtins.c
+CFILE= cd.c mis_2.c command.c read_path.c main.c hash.c mis.c prompt.c builtins.c
 
 OFILE=$(CFILE:.c=.o)
 FLAG= -Wall -Werror #-Wextra -g -Wno-unused-but-set-parameter -Wno-unused-but-set-variable

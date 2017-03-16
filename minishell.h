@@ -5,7 +5,7 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <sys/stat.h>
-
+# include <limits.h>
 typedef struct	s_hash
 {
 	char			*index;
@@ -28,12 +28,14 @@ void		prompt(t_env env);
 char		*ft_strjoinf(char *one, char *two);
 void		handle_cmd(char *cmd, t_env env);
 char		*read_cmd();
-void		w_exit(int no, t_hash **table, int size);
-void		w_error(char *file);
+void		w_exit(int no, t_env env);
+void		w_error(char *file, char *fcmd);
 void		free_split(char **spt, int index);
-void		exec_cmd(char *cmd, char **av, t_env env);
+void		exec_cmd(char *cmd, char **av, t_env env, char *save);
 int			is_builtins(char *cmd);
-void		execute_builtins(char **av, int fn);
+void		execute_builtins(char **av, int fn, t_env env);
 char		*search_exec(char *cmd, t_env env);
 char		*get_path(char **path, char *file);
+void		chdirrel(char *str, t_env env);
+void		chdirabs(char *str, char *prev, t_env env);
 #endif
