@@ -8,7 +8,6 @@ void	noflag(int argc, char **argv)
 int 	main(int argc, char **argv, char **en)
 {
 	t_env env;
-
 	env.env = en;
 
 	noflag(argc, argv);

@@ -64,12 +64,11 @@ void	cd(char **av, t_env env)
 	}
 	if (!av[1])
 	{
-		if ((err = chdir(fhash(env.table, "HOME", env.table_size))) != 0)
-			ft_putendl("cd: HOME error");
+		chdirabs(*fhash(env.table, "HOME", env.table_size), env);
 	}
 	else
 	{
-		(av[1][0] == '/' ? chdirabs(av[1]) : chdirrel(av[1], env));
+		(av[1][0] == '/' ? chdirabs(av[1], env) : chdirrel(av[1], env));
 	}
 }
 void	execute_builtins(char **av, int fn, t_env env)
@@ -77,13 +76,17 @@ void	execute_builtins(char **av, int fn, t_env env)
 	if (fn == 0)
 		echo(av);
 	if (fn == 1)
-	{
 		cd(av, env);
-	}
+	if (fn == 2)
+		my_setenv(av, env);
+	if (fn == 3)
+		my_unsetenv(av, env);
 	if (fn == 5)
 	{
 		free_split(av, 0);
 		w_exit(42, env);
 	}
+	if (fn == 4)
+		env_cmd(av, env);
 	return ;
 }

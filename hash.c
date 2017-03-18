@@ -28,7 +28,7 @@ int		ihash(char *str, int size)
 	}
 	return (total % size);
 }
-char	*fhash(t_hash **table, char *str, int size)
+char	**fhash(t_hash **table, char *str, int size)
 {
 	t_hash	*h;
 	t_hash	*s;
@@ -40,7 +40,7 @@ char	*fhash(t_hash **table, char *str, int size)
 	while (h)
 	{
 		if (ft_strcmp(h->index, str) == 0)
-			return (h->data);
+			return (&h->data);
 		h = h->next;
 	}
 	h = s;

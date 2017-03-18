@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-char	*modify_oldpwd(t_env env, char *str)
+void	update_pwd(char *str, t_env env)
 {
-	char	*abs;
-	char	*oldpwd;
+	char 	**oldpwd;
 
-	oldpwd = ft_strdup(str);
-	abs = ft_strdup(oldpwd);
-	return (abs);
+	oldpwd = fhash(env.table, "OLDPWD", env.table_size);
+	if (*oldpwd)
+		free(*oldpwd);
+	*oldpwd = ft_strdup(str);
 }
 
 void	chdirrel(char *path, t_env env)
@@ -34,24 +34,33 @@ void	chdirrel(char *path, t_env env)
 	}
 	if (path[0] == '~' && path[1] == '/')
 	{
-		abspath = ft_strdup(fhash(env.table, "HOME", env.table_size));
+		abspath = ft_strdup(*fhash(env.table, "HOME", env.table_size));
 		abspath = ft_strjoinf(abspath, "/");
 		abspath = ft_strjoinf(abspath, path + 2);
 	}
 	else
 		if (path[0] == '-' && path[1] == '\0')
-			abspath = modify_oldpwd(env, str);
+			abspath = ft_strdup(*fhash(env.table, "OLDPWD", env.table_size));
 		else
 		{
 			abspath = ft_strjoin(str, "/");
 			abspath = ft_strjoinf(abspath, path);
 		}
-	chdirabs(abspath, ft_strdup(str), env);
+	update_pwd(str, env);
+	chdirabs(abspath, env);
 	free(abspath);
 }
 
-void	chdirabs(char *path, char *prev, t_env env)
+void	chdirabs(char *path, t_env env)
 {
+	char	str[UCHAR_MAX];
+
+	if (getcwd(str, UCHAR_MAX) == 0)
+	{
+		ft_putendl("cd: Error");
+	}
+	else
+		update_pwd(str, env);
 	if (chdir(path) == -1)
 		ft_putendl("cd: no such file or directory");
 }

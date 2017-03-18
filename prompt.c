@@ -40,7 +40,7 @@ char	*search_exec(char *cmd, t_env env)
 		return (cmd);
 	if ((stat(cmd, &info)) == -1)
 	{
-		path = ft_strsplit(fhash(env.table, "PATH", env.table_size), ':');
+		path = ft_strsplit(*fhash(env.table, "PATH", env.table_size), ':');
 		url = get_path(path, cmd);
 		free(cmd);
 		return ((url == 0 ? 0 : url));
@@ -107,7 +107,7 @@ void	prompt(t_env env)
 	while (1)
 	{
 		getcwd(str, UCHAR_MAX);
-		tmp = fhash(env.table, "USER", env.table_size);
+		tmp = *fhash(env.table, "USER", env.table_size);
 		t = ft_strdup("");
 		t = ft_strjoinf(t, (tmp == 0 ? "" : tmp));
 		t = ft_strjoinf(t, "@");
