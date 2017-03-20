@@ -6,6 +6,7 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include <limits.h>
+# include <sys/wait.h>
 typedef struct	s_hash
 {
 	char			*index;
@@ -42,4 +43,8 @@ void		chdirabs(char *str, t_env env);
 void		env_cmd(char **av, t_env env);
 void		my_setenv(char **av, t_env env);
 void		my_unsetenv(char **av, t_env env);
+t_hash		**get_ptr_hash(t_env env, char *index);
+int			total_element(t_env env);
+char		**tabletostr(t_env env);
+void		fork_and_exec(char *rcmd, char **av, t_env env);
 #endif

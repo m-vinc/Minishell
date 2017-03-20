@@ -14,6 +14,8 @@
 
 int		is_builtins(char *cmd)
 {
+	if (cmd == 0)
+		return (-1);
 	if (ft_strcmp(cmd, "echo") == 0)
 		return (0);
 	if (ft_strcmp(cmd, "cd") == 0)

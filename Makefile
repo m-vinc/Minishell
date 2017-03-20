@@ -1,7 +1,7 @@
-CFILE= setenv.c env.c cd.c mis_2.c command.c read_path.c main.c hash.c mis.c prompt.c builtins.c
+CFILE= hash_2.c setenv.c env.c cd.c mis_2.c command.c read_path.c main.c hash.c mis.c prompt.c builtins.c
 
 OFILE=$(CFILE:.c=.o)
-FLAG= -Wno-unused-but-set-variable -Wall -Werror #-Wextra -g -Wno-unused-but-set-parameter -Wno-unused-but-set-variable
+FLAG= -g -Wno-unused-but-set-variable -Wall -Werror #-Wextra -g -Wno-unused-but-set-parameter -Wno-unused-but-set-variable
 NAME= minishell
 LIB= libft/libft.a
 

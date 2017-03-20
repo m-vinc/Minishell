@@ -6,25 +6,25 @@ void	execute_cmd(char *cmd, char *rcmd, t_env env, char *save)
 	char 	**av;
 	int		fn;
 
+	av = ft_strsplit(cmd, ' ');
+	free(av[0]);
+	av[0] = ft_strdup(rcmd);
 	if ((fn = is_builtins(rcmd)) != -1)
 	{
-		av = ft_strsplit(cmd, ' ');
-		free(av[0]);
-		av[0] = ft_strdup(rcmd);
 		free(cmd);
 		free(rcmd);
 		free(save);
 		execute_builtins(av, fn, env);
-		free(av[0]);
-		free_split(av, 1);
 	}
 	else
 	{
-		ft_putendl("shah");
+		fork_and_exec(rcmd, av, env);
 		(cmd ? free(cmd) : 0);
 		(rcmd ? free(rcmd) : 0);
 		(save ? free(save) : 0);
 	}
+	free(av[0]);
+	free_split(av, 1);
 }
 char	*search_exec(char *cmd, t_env env)
 {
@@ -32,23 +32,27 @@ char	*search_exec(char *cmd, t_env env)
 	char			**path;
 	int				x;
 	char			*url;
+	char			**tmp;
 
+	tmp  = fhash(env.table, "PATH", env.table_size);
 	x = 0;
+	url = 0;
 	if (cmd == 0)
 		return (0);
 	if ((is_builtins(cmd) != -1))
 		return (cmd);
 	if ((stat(cmd, &info)) == -1)
 	{
-		path = ft_strsplit(*fhash(env.table, "PATH", env.table_size), ':');
-		url = get_path(path, cmd);
+		if (tmp != 0)
+		{
+			path = ft_strsplit(*tmp, ':');
+			url = get_path(path, cmd);
+		}
 		free(cmd);
 		return ((url == 0 ? 0 : url));
 	}
 	else
-	{
 		return (cmd);
-	}
 }
 
 void	handle_cmd(char *cmd, t_env env)
