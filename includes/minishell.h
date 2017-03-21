@@ -49,4 +49,5 @@ t_hash		**get_ptr_hash(t_env env, char *index);
 int			total_element(t_env env);
 char		**tabletostr(t_env env);
 void		fork_and_exec(char *rcmd, char **av, t_env env);
+int			get_next_line(const int fd, char **line);
 #endif

@@ -107,6 +107,7 @@ void	prompt(t_env env)
 	char	*t;
 	char	**tmp;
 	char	str[PATH_MAX];
+	char	*line;
 
 	while (1)
 	{
@@ -119,6 +120,7 @@ void	prompt(t_env env)
 		t = ft_strjoinf(t, " => ");
 		ft_putstr(t);
 		free(t);
-		handle_cmd(read_cmd(), env);
+		if (get_next_line(0, &line) > 0)
+			handle_cmd(line, env);
 	}
 }

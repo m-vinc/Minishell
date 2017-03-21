@@ -6,7 +6,7 @@ t_hash	**init_zhash(int size)
 	int		x;
 
 	x = 0;
-	table = (t_hash **)w_malloc(sizeof(t_hash *) * size + 1);
+	table = (t_hash **)w_malloc(sizeof(t_hash *) * (size + 1));
 	while (x < size)
 	{
 		table[x] = 0;
@@ -21,6 +21,8 @@ int		ihash(char *str, int size)
 	total = 0;
 	if (str == 0)
 		return (-1);
+	if (size == 0)
+		size = 1;
 	while (*str != '\0')
 	{
 		total += (size * *str) + *str;
