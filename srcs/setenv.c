@@ -16,9 +16,12 @@ void	my_setenv(char **av, t_env env)
 			return ;
 		t = ft_strsub(av[x], 0 , (int)(eg - av[x]));
 		c = ft_strsub(av[x], (int)(eg - av[x]) + 1, ft_strlen(av[x]));
-		hash = fhash(env.table, av[x], env.table_size);
+		hash = fhash(env.table, t, env.table_size);
 		if (hash == 0)
+		{
+			ft_putendl("PUSHED");
 			hash_push(env.table, t, c, ihash(t, env.table_size));
+		}
 		else
 		{
 			free(*hash);
