@@ -26,3 +26,13 @@ void	w_error(char *file, char *fcmd)
 	ft_putendl_fd(p, 2);
 	free(p);
 }
+void	trim_split(char **av)
+{
+	int		x;
+	
+	x = 0;
+	while (av != 0)
+	{
+		x++;
+	}	
+}

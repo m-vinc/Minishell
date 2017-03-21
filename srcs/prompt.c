@@ -53,7 +53,7 @@ char	*search_exec(char *cmd, t_env env)
 		return ((url == 0 ? 0 : url));
 	}
 	else
-		return (cmd);
+		return (S_ISREG(info.st_mode) ? cmd : 0);
 }
 
 void	handle_cmd(char *cmd, t_env env)

@@ -84,7 +84,7 @@ t_hash	**create_hashtable(char **str, int *size)
 	x = 0;
 	while (str[x] != 0)
 		x++;
-	*size = x;
+	*size = (x == 0 ? 1 : x);
 	hash = init_zhash(x);
 	x = 0;
 	while (str[x] != 0)

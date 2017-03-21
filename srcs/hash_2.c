@@ -6,7 +6,9 @@ void	fork_and_exec(char *rcmd, char **av, t_env env)
 	int		status;
 	char	**envp;
 	int		x;
+	int		a;
 
+	a = 0;
 	x = 0;
 	envp = tabletostr(env);
 	status = 0;
@@ -23,7 +25,7 @@ void	fork_and_exec(char *rcmd, char **av, t_env env)
 	}
 	if (pid == 0)
 	{
-		execve(rcmd, av, envp);
+		(execve(rcmd, av, envp) == -1 ? w_exit(42, env) : 0);
 	}
 }
 int		total_element(t_env env)
