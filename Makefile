@@ -11,7 +11,7 @@ srcs/prompt.c \
 srcs/builtins.c
 
 OFILE=$(CFILE:.c=.o)
-FLAG= -g -Wno-unused-but-set-variable -I includes -Wall -Werror #-Wextra -g -Wno-unused-but-set-parameter -Wno-unused-but-set-variable
+FLAG=  -I includes -Wall -Werror #-Wextra -g -Wno-unused-but-set-parameter -Wno-unused-but-set-variable
 NAME= minishell
 LIB= libft/libft.a
 
