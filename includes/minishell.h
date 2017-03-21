@@ -1,6 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # define BUFF_SIZE 8
 # include <sys/types.h>
 # include <dirent.h>
