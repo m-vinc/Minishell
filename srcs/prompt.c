@@ -6,6 +6,7 @@ void	execute_cmd(char *cmd, char *rcmd, t_env env, char *save)
 	char 	**av;
 	int		fn;
 
+	cmd = trim(cmd);
 	av = ft_strsplit(cmd, ' ');
 	free(av[0]);
 	av[0] = ft_strdup(rcmd);
@@ -107,7 +108,6 @@ void	prompt(t_env env)
 	char	*t;
 	char	**tmp;
 	char	str[PATH_MAX];
-	char	*line;
 
 	while (1)
 	{
@@ -120,7 +120,6 @@ void	prompt(t_env env)
 		t = ft_strjoinf(t, " => ");
 		ft_putstr(t);
 		free(t);
-		if (get_next_line(0, &line) > 0)
-			handle_cmd(line, env);
+		handle_cmd(read_cmd(), env);
 	}
 }

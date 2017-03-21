@@ -12,7 +12,7 @@ srcs/builtins.c \
 srcs/get_next_line.c
 
 OFILE=$(CFILE:.c=.o)
-FLAG= -I includes -Wall -Werror -Wextra #-g -Wno-unused-but-set-variable
+FLAG= -I includes -Wall -Werror -Wextra -g -Wno-unused-but-set-variable
 NAME= minishell
 LIB= libft/libft.a
 

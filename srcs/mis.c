@@ -50,3 +50,11 @@ void	w_exit(int no, t_env env)
 	hash_free(env.table, env.table_size);
 	exit(no);
 }
+char	*trim(char *p)
+{
+	char	*e;
+
+	e = ft_strtrim(p);
+	free(p);
+	return (e);
+}
