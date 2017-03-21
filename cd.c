@@ -12,45 +12,52 @@
 
 #include "minishell.h"
 
-void	update_pwd(char *str, t_env env)
+void	update_pwd(char *str, t_env env, int mode)
 {
 	char 	**oldpwd;
-
-	oldpwd = fhash(env.table, "OLDPWD", env.table_size);
-	if (*oldpwd)
+	
+	if (mode == 1)
+		oldpwd = fhash(env.table, "OLDPWD", env.table_size);
+	else
+		oldpwd = fhash(env.table, "PWD", env.table_size);
+	if (oldpwd != 0)
+	{
 		free(*oldpwd);
-	*oldpwd = ft_strdup(str);
+		*oldpwd = ft_strdup(str);
+	}
 }
 
 void	chdirrel(char *path, t_env env)
 {
-	char 	str[UCHAR_MAX];
+	char 	str[PATH_MAX];
 	char	*abspath;
+	char	**opwd;
 
-	if (getcwd(str, UCHAR_MAX) == 0)
+	opwd = fhash(env.table, "OLDPWD", env.table_size);
+	if (getcwd(str, PATH_MAX) == 0)
 	{
 		ft_putendl("cd: Error");
 		return ;
 	}
-	if (path[0] == '~' && path[1] == '/')
+	if (path[0] == '-' && path[1] == '\0')
 	{
-		abspath = ft_strdup(*fhash(env.table, "HOME", env.table_size));
-		abspath = ft_strjoinf(abspath, "/");
-		abspath = ft_strjoinf(abspath, path + 2);
+		if (opwd == 0)
+		{
+			ft_putendl("cd: OLDPWD not set");
+			return ;
+		}
+		else
+			abspath = ft_strdup(*opwd);
 	}
 	else
-		if (path[0] == '-' && path[1] == '\0')
-			abspath = ft_strdup(*fhash(env.table, "OLDPWD", env.table_size));
-		else
-		{
-			abspath = ft_strjoin(str, "/");
-			abspath = ft_strjoinf(abspath, path);
-		}
-	update_pwd(str, env);
+	{
+		abspath = ft_strjoin(str, "/");
+		abspath = ft_strjoinf(abspath, path);
+	}
+	update_pwd(str, env, 1);
 	chdirabs(abspath, env);
 	free(abspath);
 }
-
 void	chdirabs(char *path, t_env env)
 {
 	char	str[UCHAR_MAX];
@@ -60,7 +67,9 @@ void	chdirabs(char *path, t_env env)
 		ft_putendl("cd: Error");
 	}
 	else
-		update_pwd(str, env);
+		update_pwd(str, env, 1);
 	if (chdir(path) == -1)
 		ft_putendl("cd: no such file or directory");
+	else
+		update_pwd(path, env, 0);
 }

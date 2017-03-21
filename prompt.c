@@ -105,15 +105,15 @@ char	*read_cmd()
 void	prompt(t_env env)
 {
 	char	*t;
-	char	*tmp;
-	char	str[UCHAR_MAX];
+	char	**tmp;
+	char	str[PATH_MAX];
 
 	while (1)
 	{
-		getcwd(str, UCHAR_MAX);
-		tmp = *fhash(env.table, "USER", env.table_size);
+		getcwd(str, PATH_MAX);
+		tmp = fhash(env.table, "USER", env.table_size);
 		t = ft_strdup("");
-		t = ft_strjoinf(t, (tmp == 0 ? "" : tmp));
+		t = ft_strjoinf(t, (tmp == 0 ? "" : *tmp));
 		t = ft_strjoinf(t, "@");
 		t = ft_strjoinf(t, str);
 		t = ft_strjoinf(t, " => ");

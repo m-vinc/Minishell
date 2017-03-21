@@ -29,19 +29,6 @@ void	my_setenv(char **av, t_env env)
 		x++;
 	}
 }
-void	free_hashe(t_env env, int index)
-{
-	free(env.table[index]->index);
-	free(env.table[index]->data);
-	free(env.table[index]);
-	env.table[index] = 0;
-}
-void	free_el(t_hash **node)
-{
-	free((*node)->index);
-	free((*node)->data);
-	node = 0;
-}
 t_hash	*remove_hash(t_hash *hash, char *index)
 {
 	t_hash	*cnext;

@@ -54,7 +54,9 @@ void	cd(char **av, t_env env)
 {
 	int		x;
 	int		err;
+	char	**home;
 
+	home = fhash(env.table, "HOME", env.table_size);
 	err = 0;
 	x = 1;
 	while (av[x] != 0)
@@ -66,7 +68,10 @@ void	cd(char **av, t_env env)
 	}
 	if (!av[1])
 	{
-		chdirabs(*fhash(env.table, "HOME", env.table_size), env);
+		if (home != 0)
+			chdirabs(*fhash(env.table, "HOME", env.table_size), env);
+		else
+			ft_putendl("cd: HOME not set");
 	}
 	else
 	{

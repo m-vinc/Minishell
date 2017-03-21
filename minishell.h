@@ -7,6 +7,8 @@
 # include <sys/stat.h>
 # include <limits.h>
 # include <sys/wait.h>
+# include <signal.h>
+
 typedef struct	s_hash
 {
 	char			*index;
