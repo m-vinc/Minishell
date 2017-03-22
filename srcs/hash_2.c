@@ -3,19 +3,24 @@
 void	fork_and_exec(char *rcmd, char **av, t_env env)
 {
 	pid_t	pid;
-	int		status;
 	char	**envp;
 	int		x;
-	int		a;
+	struct	stat	s;
 
-	a = 0;
 	x = 0;
-	envp = tabletostr(env);
-	status = 0;
-	pid = fork();
+	if (stat(rcmd, &s) == 0 && s.st_mode & S_IXUSR)
+	{
+		envp = tabletostr(env);
+		pid = fork();
+	}
+	else
+	{
+		w_errornf(rcmd);
+		return ;
+	}
 	if (pid > 0)
 	{
-		waitpid(pid, &status, 0);
+		wait(0);
 		while (x < total_element(env))
 		{
 			free(envp[x]);
@@ -24,9 +29,7 @@ void	fork_and_exec(char *rcmd, char **av, t_env env)
 		free(envp);
 	}
 	if (pid == 0)
-	{
-		(execve(rcmd, av, envp) == -1 ? w_exit(42, env) : 0);
-	}
+		execve(rcmd, av, envp);
 }
 int		total_element(t_env env)
 {
