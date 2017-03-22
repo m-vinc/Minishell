@@ -29,10 +29,14 @@ void	w_error(char *file, char *fcmd)
 void	trim_split(char **av)
 {
 	int		x;
-	
+	char	*tmp;
+
 	x = 0;
-	while (av != 0)
+	while (av[x] != 0)
 	{
+		tmp = av[x];
+		av[x] = ft_strtrim(av[x]);
+		free(tmp);
 		x++;
 	}	
 }

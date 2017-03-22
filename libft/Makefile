@@ -22,6 +22,7 @@ SOURCE = ./ft_atoi.c \
 ./ft_isalnum.c \
 ./ft_isalpha.c \
 ./ft_isascii.c \
+./ft_strtsplit.c \
 ./ft_isdigit.c \
 ./ft_isprint.c \
 ./ft_itoa.c \

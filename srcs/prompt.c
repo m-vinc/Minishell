@@ -6,8 +6,7 @@ void	execute_cmd(char *cmd, char *rcmd, t_env env, char *save)
 	char 	**av;
 	int		fn;
 
-	cmd = trim(cmd);
-	av = ft_strsplit(cmd, ' ');
+	av = ft_strtsplit(cmd);
 	free(av[0]);
 	av[0] = ft_strdup(rcmd);
 	if ((fn = is_builtins(rcmd)) != -1)

@@ -23,6 +23,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				**ft_strtsplit(char const *c);
 int					ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putnbr(int n);
