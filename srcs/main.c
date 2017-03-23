@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:08:16 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/23 16:09:06 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/23 17:37:20 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		main(int argc, char **argv, char **en)
 	t_env env;
 
 	env.env = en;
-	noflag(argc, argv);
+	if (argc && argv)
+		noflag(argc, argv);
 	env.table = create_hashtable(en, &env.table_size);
 	prompt(env);
 	hash_free(env.table, env.table_size);

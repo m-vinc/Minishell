@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:52:36 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/23 15:55:06 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/23 17:00:25 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,16 @@ void	prompt(t_env env)
 	char	**tmp;
 	char	str[PATH_MAX];
 
+	tmp = 0;
 	while (1)
 	{
 		getcwd(str, PATH_MAX);
 		tmp = fhash(env.table, "USER", env.table_size);
 		t = ft_strdup("");
-		t = ft_strjoinf(t, (tmp == 0 ? "" : *tmp));
+		if (tmp)
+		{
+			t = ft_strjoinf(t, *tmp);
+		}
 		t = ft_strjoinf(t, "@");
 		t = ft_strjoinf(t, str);
 		t = ft_strjoinf(t, " => ");

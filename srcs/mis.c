@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:03:36 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/23 16:07:17 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/23 17:03:38 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	hash_free(t_hash **table, int size)
 	t_hash	*tmp;
 
 	x = 0;
+	if (table == 0)
+		return ;
 	while (x < size)
 	{
 		while (table[x])

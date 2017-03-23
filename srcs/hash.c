@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:04:01 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/23 16:04:40 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/23 17:36:26 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_hash	**init_zhash(int size)
 		table[x] = 0;
 		x++;
 	}
+	table[size] = 0;
 	return (table);
 }
 
@@ -46,20 +47,20 @@ int		ihash(char *str, int size)
 
 char	**fhash(t_hash **table, char *str, int size)
 {
-	t_hash	*h;
 	t_hash	*s;
+	int		x;
 
-	h = table[ihash(str, size)];
-	s = h;
+	x = ihash(str, size);
+	s = table[x];
 	if (!str)
 		return (0);
-	while (h)
+	while (table[x] != 0)
 	{
-		if (ft_strcmp(h->index, str) == 0)
-			return (&h->data);
-		h = h->next;
+		if (ft_strcmp(table[x]->index, str) == 0)
+			return (&table[x]->data);
+		table[x] = table[x]->next;
 	}
-	h = s;
+	table[x] = s;
 	return (0);
 }
 
@@ -98,11 +99,14 @@ t_hash	**create_hashtable(char **str, int *size)
 	t_hash	**hash;
 
 	x = 0;
-	while (str[x] != 0)
-		x++;
+	if (str != 0)
+		while (str[x] != 0)
+			x++;
 	*size = (x == 0 ? 1 : x);
 	hash = init_zhash(x);
 	x = 0;
+	if (str == 0)
+		return (hash);
 	while (str[x] != 0)
 	{
 		tmp = str[x];
