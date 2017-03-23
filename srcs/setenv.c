@@ -1,4 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setenv.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 15:55:16 by vmorvan           #+#    #+#             */
+/*   Updated: 2017/03/23 16:01:48 by vmorvan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+void	free_c_t(char *c, char *t)
+{
+	free(c);
+	free(t);
+}
 
 void	my_setenv(char **av, t_env env)
 {
@@ -14,7 +32,7 @@ void	my_setenv(char **av, t_env env)
 	{
 		if ((eg = ft_strchr(av[x], '=')) == 0)
 			return ;
-		t = ft_strsub(av[x], 0 , (int)(eg - av[x]));
+		t = ft_strsub(av[x], 0, (int)(eg - av[x]));
 		c = ft_strsub(av[x], (int)(eg - av[x]) + 1, ft_strlen(av[x]));
 		hash = fhash(env.table, t, env.table_size);
 		if (hash == 0)
@@ -24,18 +42,17 @@ void	my_setenv(char **av, t_env env)
 			free(*hash);
 			*hash = ft_strdup(c);
 		}
-		free(c);
-		free(t);
+		free_c_t(c, t);
 		x++;
 	}
 }
+
 t_hash	*remove_hash(t_hash *hash, char *index)
 {
 	t_hash	*cnext;
 
 	if (hash == 0)
 		return (0);
-
 	if (ft_strcmp(hash->index, index) == 0)
 	{
 		cnext = hash->next;
@@ -47,6 +64,7 @@ t_hash	*remove_hash(t_hash *hash, char *index)
 	hash->next = remove_hash(hash->next, index);
 	return (hash);
 }
+
 void	my_unsetenv(char **av, t_env env)
 {
 	int		x;

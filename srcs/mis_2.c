@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:18:05 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/16 18:48:29 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/23 16:08:05 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	w_error(char *file, char *fcmd)
 	ft_putendl_fd(p, 2);
 	free(p);
 }
+
 void	trim_split(char **av)
 {
 	int		x;
@@ -38,8 +39,9 @@ void	trim_split(char **av)
 		av[x] = ft_strtrim(av[x]);
 		free(tmp);
 		x++;
-	}	
+	}
 }
+
 void	w_errornf(char *str)
 {
 	char	*error;

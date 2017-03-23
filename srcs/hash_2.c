@@ -1,36 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash_2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 16:06:49 by vmorvan           #+#    #+#             */
+/*   Updated: 2017/03/23 16:06:50 by vmorvan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	fork_and_exec(char *rcmd, char **av, t_env env)
-{
-	pid_t	pid;
-	char	**envp;
-	int		x;
-	struct	stat	s;
-
-	x = 0;
-	if (stat(rcmd, &s) == 0 && s.st_mode & S_IXUSR)
-	{
-		envp = tabletostr(env);
-		pid = fork();
-	}
-	else
-	{
-		w_errornf(rcmd);
-		return ;
-	}
-	if (pid > 0)
-	{
-		wait(0);
-		while (x < total_element(env))
-		{
-			free(envp[x]);
-			x++;
-		}
-		free(envp);
-	}
-	if (pid == 0)
-		execve(rcmd, av, envp);
-}
 int		total_element(t_env env)
 {
 	int		x;

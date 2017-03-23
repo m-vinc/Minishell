@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 16:04:01 by vmorvan           #+#    #+#             */
+/*   Updated: 2017/03/23 16:04:40 by vmorvan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_hash	**init_zhash(int size)
@@ -14,6 +26,7 @@ t_hash	**init_zhash(int size)
 	}
 	return (table);
 }
+
 int		ihash(char *str, int size)
 {
 	int	total;
@@ -30,6 +43,7 @@ int		ihash(char *str, int size)
 	}
 	return (total % size);
 }
+
 char	**fhash(t_hash **table, char *str, int size)
 {
 	t_hash	*h;
@@ -48,6 +62,7 @@ char	**fhash(t_hash **table, char *str, int size)
 	h = s;
 	return (0);
 }
+
 void	hash_push(t_hash **hash, char *index, char *str, int ihash)
 {
 	t_hash	*save;
@@ -67,14 +82,15 @@ void	hash_push(t_hash **hash, char *index, char *str, int ihash)
 	{
 		save = hash[ihash];
 		while (hash[ihash]->next)
-			hash[ihash] = hash[ihash]->next; 
+			hash[ihash] = hash[ihash]->next;
 		hash[ihash]->next = w_malloc(sizeof(t_hash));
 		hash[ihash]->next->next = 0;
 		hash[ihash]->next->data = ft_strdup(str);
 		hash[ihash]->next->index = ft_strdup(index);
 		hash[ihash] = save;
-	}	
+	}
 }
+
 t_hash	**create_hashtable(char **str, int *size)
 {
 	int		x;

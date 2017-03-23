@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:50:11 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/16 18:32:37 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/23 15:37:18 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	echo(char **av)
 	}
 	ft_putchar('\n');
 }
+
 void	cd(char **av, t_env env)
 {
 	int		x;
@@ -78,6 +79,7 @@ void	cd(char **av, t_env env)
 		(av[1][0] == '/' ? chdirabs(av[1], env) : chdirrel(av[1], env));
 	}
 }
+
 void	execute_builtins(char **av, int fn, t_env env)
 {
 	if (fn == 0)

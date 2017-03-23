@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prompt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 15:52:36 by vmorvan           #+#    #+#             */
+/*   Updated: 2017/03/23 15:55:06 by vmorvan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#include <limits.h>
 
 void	execute_cmd(char *cmd, char *rcmd, t_env env, char *save)
 {
-	char 	**av;
+	char	**av;
 	int		fn;
 
 	av = ft_strtsplit(cmd);
@@ -26,6 +37,7 @@ void	execute_cmd(char *cmd, char *rcmd, t_env env, char *save)
 	free(av[0]);
 	free_split(av, 1);
 }
+
 char	*search_exec(char *cmd, t_env env)
 {
 	struct stat		info;
@@ -34,7 +46,7 @@ char	*search_exec(char *cmd, t_env env)
 	char			*url;
 	char			**tmp;
 
-	tmp  = fhash(env.table, "PATH", env.table_size);
+	tmp = fhash(env.table, "PATH", env.table_size);
 	x = 0;
 	url = 0;
 	if (cmd == 0)
@@ -66,7 +78,7 @@ void	handle_cmd(char *cmd, t_env env)
 	x = 0;
 	while (cmd[x] != '\0' && (cmd[x] == ' ' || cmd[x] == '\t'))
 		x++;
-	while (cmd[x + y] != '\0' &&  (cmd[x + y] != ' ' && cmd[x + y] != '\t'))
+	while (cmd[x + y] != '\0' && (cmd[x + y] != ' ' && cmd[x + y] != '\t'))
 		y++;
 	if ((x == 0 && y == 0) || (cmd[x] == '\0'))
 	{
@@ -79,9 +91,9 @@ void	handle_cmd(char *cmd, t_env env)
 	(rcmd == 0 ? w_error(save, cmd) : execute_cmd(cmd, rcmd, env, save));
 }
 
-char	*read_cmd()
+char	*read_cmd(void)
 {
-	char	 *cmd;
+	char	*cmd;
 	int		ret;
 	char	buf[BUFF_SIZE + 1];
 	char	*ptr;

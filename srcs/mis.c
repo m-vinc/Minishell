@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mis.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 16:03:36 by vmorvan           #+#    #+#             */
+/*   Updated: 2017/03/23 16:07:17 by vmorvan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*ft_strjoinf(char *one, char *two)
@@ -11,7 +23,7 @@ char	*ft_strjoinf(char *one, char *two)
 	return (one);
 }
 
-void	*w_malloc(size_t	size)
+void	*w_malloc(size_t size)
 {
 	void	*m;
 
@@ -21,9 +33,10 @@ void	*w_malloc(size_t	size)
 	}
 	return (m);
 }
+
 void	hash_free(t_hash **table, int size)
 {
-	int 	x;
+	int		x;
 	t_hash	*tmp;
 
 	x = 0;
@@ -45,6 +58,7 @@ void	hash_free(t_hash **table, int size)
 	}
 	free(table);
 }
+
 void	w_exit(int no, t_env env)
 {
 	hash_free(env.table, env.table_size);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_path.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 16:02:46 by vmorvan           #+#    #+#             */
+/*   Updated: 2017/03/23 16:03:23 by vmorvan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void		free_split(char **spt, int index)
@@ -6,6 +18,7 @@ void		free_split(char **spt, int index)
 		free(spt[index++]);
 	free(spt);
 }
+
 static char	*makeurl(char *file, char *path)
 {
 	char *tmp;
@@ -16,13 +29,14 @@ static char	*makeurl(char *file, char *path)
 	tmp = ft_strjoinf(tmp, file);
 	return (tmp);
 }
+
 char		*get_path(char **path, char *file)
 {
 	DIR				*folder;
 	struct dirent	*dfile;
 	int				x;
 	char			*url;
-	
+
 	x = 0;
 	while (path[x] != 0)
 	{

@@ -3,16 +3,15 @@ srcs/setenv.c \
 srcs/env.c \
 srcs/cd.c \
 srcs/mis_2.c \
-srcs/command.c \
 srcs/read_path.c \
 srcs/main.c srcs/hash.c \
 srcs/mis.c \
 srcs/prompt.c \
 srcs/builtins.c \
-srcs/get_next_line.c
+srcs/fork.c
 
 OFILE=$(CFILE:.c=.o)
-FLAG= -I includes -Wall -Werror -Wextra -g -Wno-unused-but-set-variable
+FLAG= -I includes -Wall -Werror -Wextra #-g -Wno-unused-but-set-variable
 NAME= minishell
 LIB= libft/libft.a
 

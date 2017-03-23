@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:44:23 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/16 19:22:47 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/23 15:50:29 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	update_pwd(char *str, t_env env, int mode)
 {
-	char 	**oldpwd;
-	
+	char	**oldpwd;
+
 	if (mode == 1)
 		oldpwd = fhash(env.table, "OLDPWD", env.table_size);
 	else
@@ -27,9 +27,18 @@ void	update_pwd(char *str, t_env env, int mode)
 	}
 }
 
+char	*url(char *str, char *dest)
+{
+	char	*abs;
+
+	abs = ft_strjoin(str, "/");
+	abs = ft_strjoinf(abs, dest);
+	return (abs);
+}
+
 void	chdirrel(char *path, t_env env)
 {
-	char 	str[PATH_MAX];
+	char	str[PATH_MAX];
 	char	*abspath;
 	char	**opwd;
 
@@ -40,7 +49,6 @@ void	chdirrel(char *path, t_env env)
 		return ;
 	}
 	if (path[0] == '-' && path[1] == '\0')
-	{
 		if (opwd == 0)
 		{
 			ft_putendl("cd: OLDPWD not set");
@@ -48,16 +56,13 @@ void	chdirrel(char *path, t_env env)
 		}
 		else
 			abspath = ft_strdup(*opwd);
-	}
 	else
-	{
-		abspath = ft_strjoin(str, "/");
-		abspath = ft_strjoinf(abspath, path);
-	}
+		abspath = url(str, path);
 	update_pwd(str, env, 1);
 	chdirabs(abspath, env);
 	free(abspath);
 }
+
 void	chdirabs(char *path, t_env env)
 {
 	char	str[UCHAR_MAX];
