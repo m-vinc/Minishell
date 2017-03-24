@@ -6,7 +6,7 @@
 /*   By: vmorvan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:44:23 by vmorvan           #+#    #+#             */
-/*   Updated: 2017/03/23 15:50:29 by vmorvan          ###   ########.fr       */
+/*   Updated: 2017/03/24 15:46:29 by vmorvan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,8 @@ void	chdirabs(char *path, t_env env)
 	if (chdir(path) == -1)
 		ft_putendl("cd: no such file or directory");
 	else
-		update_pwd(path, env, 0);
+	{
+		getcwd(str, UCHAR_MAX);
+		update_pwd(str, env, 0);
+	}
 }
